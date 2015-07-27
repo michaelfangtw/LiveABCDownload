@@ -27,10 +27,10 @@ namespace LiveABCDownload
 
     
     //event-1:建立委派EventHandler
-    public delegate void ProgressChangedEventHandler(DownloadProgressChangedEventArgs e);
+    public delegate void ProgressChangedEventHandler(object sender ,DownloadProgressChangedEventArgs e);
 
-    public delegate void WindowLoggerEventHandler(string msg);
-    public delegate void WindowResultLoggerEventHandler(string msg);
+    public delegate void WindowLoggerEventHandler(object sender, WindowLogEventArgs e);
+    public delegate void WindowResultLoggerEventHandler(object sender, WindowLogEventArgs e);
 
 
     public class DownloadFile
@@ -152,7 +152,7 @@ namespace LiveABCDownload
                     client.DownloadProgressChanged += (s, e) =>
                     {
                         //event-3.觸發event
-                        OnProgressChanged(e);
+                        OnProgressChanged(this,e);
                     };
                     await client.DownloadFileTaskAsync(new Uri(downloadUrl), filepath);
                     success++;
@@ -184,7 +184,7 @@ namespace LiveABCDownload
         {
             if (msg == null) return;
             _logHelper.Log(logtype, msg);            
-            OnWindowLogger(msg);
+            OnWindowLogger(this,new WindowLogEventArgs {Log=msg});
         }
 
 
@@ -192,7 +192,7 @@ namespace LiveABCDownload
         {
             if (msg == null) return;
             _logHelper.Log(logtype, msg);
-            OnWindowResultLogger(msg);
+            OnWindowResultLogger(this,new WindowLogEventArgs { Log = msg });
         }
 
     }

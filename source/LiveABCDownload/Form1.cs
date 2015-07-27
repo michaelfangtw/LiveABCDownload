@@ -19,7 +19,7 @@ using System.Diagnostics;
 using LiveABCDownload;
 using System.Collections.Generic;
 
-namespace AsyncAwaitTest
+namespace LiveABCDownload
 {
    
     public partial class FrmAsyncTest  :Form
@@ -45,7 +45,7 @@ namespace AsyncAwaitTest
         }
 
         //event使用2-1.與delegate相同簽名的function:ProgressChanged
-        private void DownloadFile_OnProgressChanged(DownloadProgressChangedEventArgs e)
+        private void DownloadFile_OnProgressChanged(Object sender,DownloadProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
         }
@@ -55,15 +55,15 @@ namespace AsyncAwaitTest
     
 
 
-        private void DownloadFile_OnWindowLogger(string msg)
+        private void DownloadFile_OnWindowLogger(Object sender, WindowLogEventArgs e)
         {
-            txtLog.Text = string.Format("{0}\r\n{1}", msg, txtLog.Text);
+            txtLog.Text = string.Format("{0}\r\n{1}", e.Log , txtLog.Text);
 
         }
 
-        private void DownloadFile_OnWindowResultLogger(string msg)
+        private void DownloadFile_OnWindowResultLogger(Object sender, WindowLogEventArgs e)
         {
-            txtResultLog.Text = string.Format("{0}\r\n{1}", msg, txtResultLog.Text );
+            txtResultLog.Text = string.Format("{0}\r\n{1}", e.Log, txtResultLog.Text );
         }
 
         private void timer1_Tick(object sender, EventArgs e)

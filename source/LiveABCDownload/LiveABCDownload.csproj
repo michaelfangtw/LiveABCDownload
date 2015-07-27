@@ -60,6 +60,7 @@
     </Compile>
     <Compile Include="LiveABCDownload\DownloadFile.cs" />
     <Compile Include="LiveABCDownload\DownloadListBase.cs" />
+    <Compile Include="LiveABCDownload\WindowLogEventArgs.cs" />
     <Compile Include="Logger\ILogger.cs" />
     <Compile Include="Logger\Log4NetLogger.cs" />
     <Compile Include="Logger\LogHelper.cs" />
